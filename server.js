@@ -26,7 +26,7 @@ if (isDeveloping) {
     }
   });
 
-  const bundlePath = path.join(__dirname, './public/build/index.html')
+  const bundlePath = path.join(__dirname, './public/build/index.html');
 
   app.use(middleware);
   app.use(webpackHotMiddleware(compiler));
@@ -35,10 +35,8 @@ if (isDeveloping) {
     res.end();
   });
 } else {
-  app.use(express.static(__dirname + './public/build'));
-  app.get('*', function response(req, res) {
-    res.sendFile(path.join(__dirname, './public/build/index.html'));
-  });
+  const staticPath = path.join(__dirname, 'public/build')
+  app.use(express.static(staticPath));
 }
 
 app.listen(port, '0.0.0.0', function onStart(err) {
