@@ -5,6 +5,10 @@ This repository is created for this [Medium post](https://medium.com/@andyccs/ae
 # How to run this project?
 
 ```Shell
-npm run start
-# open your browser at http://localhost:8080
+# For development
+$ node index.js
+
+# For production
+$ webpack
+$ NODE_ENV=production node index.js
 ```
