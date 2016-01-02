@@ -1,14 +1,16 @@
 var path = require('path');
+var webpack = require('webpack');
 
-var contextPath = path.resolve(__dirname, 'src');
+var javascriptEntryPath = path.resolve(__dirname, 'src', 'index.js');
+var htmlEntryPath = path.resolve(__dirname, 'src', 'index.html');
 var buildPath = path.resolve(__dirname, 'public', 'build');
 
 module.exports = {
-  context: contextPath,
-  entry: {
-    javascript: './index.js',
-    html: './index.html'
-  },
+  entry: [
+    'webpack-hot-middleware/client?reload=true', 
+    javascriptEntryPath,
+    htmlEntryPath
+  ],
   output: {
     path: buildPath,
     filename: 'bundle.js',
@@ -22,5 +24,10 @@ module.exports = {
       test: /\.html$/,
       loader: 'file?name=[name].[ext]',
     }], 
-  }
+  },
+  plugins: [ 
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  ]
 }
