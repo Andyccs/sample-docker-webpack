@@ -14,6 +14,6 @@ web:
       else 
         cp -a /tmp/node_modules /usr/src/app/website; 
       fi && 
-      npm install --dev && 
+      npm install && 
       /usr/local/bin/node ./index.js
     '
