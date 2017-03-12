@@ -7,7 +7,7 @@ var buildPath = path.resolve(__dirname, 'public', 'build');
 
 module.exports = {
   entry: [
-    'webpack-hot-middleware/client?reload=true', 
+    'webpack-hot-middleware/client?reload=true',
     javascriptEntryPath,
     htmlEntryPath
   ],
@@ -19,15 +19,15 @@ module.exports = {
     loaders: [{
       test: /\.js$/,
       exclude: /(node_modules|bower_components)/,
-      loaders: ['react-hot', 'babel?presets[]=react,presets[]=es2015'],
+      loaders: ['babel-loader?presets[]=react,presets[]=es2015'],
     }, {
       test: /\.html$/,
-      loader: 'file?name=[name].[ext]',
-    }], 
+      loader: 'file-loader?name=[name].[ext]',
+    }],
   },
-  plugins: [ 
-    new webpack.optimize.OccurenceOrderPlugin(),
+  plugins: [
+    (new (webpack.optimize.OccurenceOrderPlugin || webpack.optimize.OccurrenceOrderPlugin)()),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin()
+    new webpack.NoEmitOnErrorsPlugin()
   ]
 }
